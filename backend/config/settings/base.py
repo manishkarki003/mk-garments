@@ -26,12 +26,12 @@ INSTALLED_APPS = [
     'django_filters',
 
     # Local apps
-    # 'apps.company',
-    # 'apps.products',
-    # 'apps.manufacturing',
-    # 'apps.content',
-    # 'apps.gallery',
-    # 'apps.inquiries',
+    'apps.company',
+    'apps.products',
+    'apps.manufacturing',
+    'apps.content',
+    'apps.gallery',
+    'apps.inquiries',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
