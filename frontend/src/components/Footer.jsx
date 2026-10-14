@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Button from './Button'
 import Container from './Container'
 import { useCompany } from '../context/CompanyContext'
-import { NAV_LINKS, PLACEHOLDER_COMPANY_NAME } from '../utils/navigation'
+import { FOOTER_EXTRA_LINKS, NAV_LINKS, PLACEHOLDER_COMPANY_NAME } from '../utils/navigation'
 
 function Footer() {
   const { company } = useCompany()
@@ -20,7 +20,7 @@ function Footer() {
         <div>
           <h3 className="text-sm font-medium uppercase tracking-widest text-warm-white/60">Explore</h3>
           <nav className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3" aria-label="Footer navigation">
-            {NAV_LINKS.map(({ label, to }) => <Link key={to} to={to} className="text-sm text-warm-white/80 transition-colors hover:text-accent">{label}</Link>)}
+            {[...NAV_LINKS, ...FOOTER_EXTRA_LINKS].map(({ label, to }) => <Link key={to} to={to} className="text-sm text-warm-white/80 transition-colors hover:text-accent">{label}</Link>)}
           </nav>
         </div>
         <div>

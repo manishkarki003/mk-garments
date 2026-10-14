@@ -12,3 +12,7 @@ export const NAV_LINKS = [
 
 export const PLACEHOLDER_WHATSAPP = '9779800000000'
 export const PLACEHOLDER_COMPANY_NAME = 'MK Garments'
+export const FOOTER_EXTRA_LINKS = [
+  { label: 'Gallery', to: '/gallery' },
+  { label: 'Certifications', to: '/certifications' },
+]

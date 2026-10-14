@@ -44,3 +44,14 @@ export const SUSTAINABILITY_SECTIONS = [
   'Worker-focused practices',
   'Packaging practices',
 ].map((title) => ({ title, description: '' }))
+
+// DEMO DEFAULT - replace with real company info
+export const PHASE9_COPY = {
+  projectsDescription: 'A look at how we turn requirements into finished garments.',
+  projectsEmpty: 'Project case studies will be published here soon. Contact us to discuss your production needs.',
+  galleryDescription: 'A look at our facility, production process and finished garments.',
+  galleryEmpty: 'Photos will be added here soon.',
+  blogDescription: 'Practical articles on garment manufacturing, sampling, quality and sourcing.',
+  blogEmpty: 'Articles are coming soon.',
+  certificationsEmpty: 'Certification details will be published here when available.',
+}
