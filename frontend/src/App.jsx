@@ -6,6 +6,10 @@ import Home from './pages/Home'
 
 const Products = lazy(() => import('./pages/Products'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const Manufacturing = lazy(() => import('./pages/Manufacturing'))
+const Process = lazy(() => import('./pages/Process'))
+const Quality = lazy(() => import('./pages/Quality'))
+const Sustainability = lazy(() => import('./pages/Sustainability'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -38,9 +42,14 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            {pages.map(([path, title]) => path === '/products'
-              ? <Route key={path} path={path} element={<Products />} />
-              : <Route key={path} path={path} element={<PlaceholderPage title={title} />} />)}
+            {pages.map(([path, title]) => {
+              if (path === '/products') return <Route key={path} path={path} element={<Products />} />
+              if (path === '/manufacturing') return <Route key={path} path={path} element={<Manufacturing />} />
+              if (path === '/process') return <Route key={path} path={path} element={<Process />} />
+              if (path === '/quality') return <Route key={path} path={path} element={<Quality />} />
+              if (path === '/sustainability') return <Route key={path} path={path} element={<Sustainability />} />
+              return <Route key={path} path={path} element={<PlaceholderPage title={title} />} />
+            })}
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="*" element={<PlaceholderPage title="Page not found" />} />
           </Route>
