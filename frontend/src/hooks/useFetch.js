@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 
-function useFetch(fetcher) {
+function useFetch(fetcher, dependencies = [fetcher]) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     let mounted = true
+    // eslint-disable-next-line react/set-state-in-effect
+    setLoading(true)
+    setError(null)
 
     fetcher()
       .then((result) => {
@@ -22,7 +25,8 @@ function useFetch(fetcher) {
     return () => {
       mounted = false
     }
-  }, [fetcher])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetcher, ...dependencies])
 
   return { data, loading, error }
 }

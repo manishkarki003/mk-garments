@@ -1,10 +1,11 @@
-function SectionHeading({ eyebrow, title, description, align = 'left' }) {
+function SectionHeading({ eyebrow, title, description, align = 'left', as = 'h2' }) {
   const alignment = align === 'center' ? 'mx-auto text-center' : ''
+  const Title = as
 
   return (
     <div className={`max-w-2xl ${alignment}`}>
       <p className="text-xs font-semibold uppercase tracking-widest text-accent">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl leading-tight lg:text-4xl">{title}</h2>
+      <Title className="mt-3 text-3xl leading-tight lg:text-4xl">{title}</Title>
       {description && <p className="mt-5 leading-7 text-muted">{description}</p>}
     </div>
   )

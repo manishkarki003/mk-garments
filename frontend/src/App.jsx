@@ -1,8 +1,11 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
-import Home from './pages/Home'
 import PlaceholderPage from './pages/PlaceholderPage'
+import Home from './pages/Home'
+
+const Products = lazy(() => import('./pages/Products'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -31,13 +34,18 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          {pages.map(([path, title]) => <Route key={path} path={path} element={<PlaceholderPage title={title} />} />)}
-          <Route path="*" element={<PlaceholderPage title="Page not found" />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<div className="min-h-[60vh]" />}>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            {pages.map(([path, title]) => path === '/products'
+              ? <Route key={path} path={path} element={<Products />} />
+              : <Route key={path} path={path} element={<PlaceholderPage title={title} />} />)}
+            <Route path="/products/:slug" element={<ProductDetail />} />
+            <Route path="*" element={<PlaceholderPage title="Page not found" />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   )
 }
