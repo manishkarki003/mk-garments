@@ -1,19 +1,44 @@
-import { useEffect, useState } from 'react'
-import { getProducts } from './services/products'
+import { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import MainLayout from './layouts/MainLayout'
+import Home from './pages/Home'
+import PlaceholderPage from './pages/PlaceholderPage'
 
-function App() {
-  const [status, setStatus] = useState('Loading...')
+function ScrollToTop() {
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    getProducts()
-      .then((data) => setStatus(`Connected! Product count: ${data.count}`))
-      .catch((err) => setStatus(`Error: ${err.message}`))
-  }, [])
+    window.scrollTo(0, 0)
+  }, [pathname])
 
+  return null
+}
+
+const pages = [
+  ['/about', 'About'],
+  ['/manufacturing', 'Manufacturing'],
+  ['/products', 'Products'],
+  ['/process', 'Our Process'],
+  ['/quality', 'Quality Control'],
+  ['/sustainability', 'Sustainability'],
+  ['/projects', 'Projects'],
+  ['/insights', 'Insights'],
+  ['/contact', 'Contact'],
+  ['/quote', 'Request a Quote'],
+]
+
+function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-warm-white">
-      <h1 className="text-2xl font-sans text-charcoal">{status}</h1>
-    </div>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          {pages.map(([path, title]) => <Route key={path} path={path} element={<PlaceholderPage title={title} />} />)}
+          <Route path="*" element={<PlaceholderPage title="Page not found" />} />
+        </Route>
+      </Routes>
+    </>
   )
 }
 
